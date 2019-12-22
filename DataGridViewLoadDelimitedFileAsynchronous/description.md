@@ -1,0 +1,1 @@
+﻿# Simple read file Asynchronous
