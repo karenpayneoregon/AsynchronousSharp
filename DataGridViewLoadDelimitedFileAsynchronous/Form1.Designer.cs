@@ -41,7 +41,10 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ExpandColumnsCheckBox = new System.Windows.Forms.CheckBox();
+            this.ConventionalReadButton = new System.Windows.Forms.Button();
             this.Example5Button = new System.Windows.Forms.Button();
             this.ElapsedTimeLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,14 +55,15 @@
             this.Example5aButton = new System.Windows.Forms.Button();
             this.PleaseWaitPanel = new System.Windows.Forms.Panel();
             this.PleaseWaitLabel = new System.Windows.Forms.Label();
-            this.ConventionalReadButton = new System.Windows.Forms.Button();
-            this.ExpandColumnsCheckBox = new System.Windows.Forms.CheckBox();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.Example1WithCancelButton = new System.Windows.Forms.Button();
+            this.CancelExample1Button = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.PleaseWaitPanel.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -68,7 +72,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 25);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(848, 283);
+            this.dataGridView1.Size = new System.Drawing.Size(848, 287);
             this.dataGridView1.TabIndex = 0;
             // 
             // bindingNavigator1
@@ -165,8 +169,19 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.ExpandColumnsCheckBox);
             this.panel1.Controls.Add(this.ConventionalReadButton);
             this.panel1.Controls.Add(this.Example5Button);
@@ -178,14 +193,34 @@
             this.panel1.Controls.Add(this.Example1Button);
             this.panel1.Controls.Add(this.Example5aButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 308);
+            this.panel1.Location = new System.Drawing.Point(0, 312);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(848, 91);
+            this.panel1.Size = new System.Drawing.Size(848, 153);
             this.panel1.TabIndex = 2;
+            // 
+            // ExpandColumnsCheckBox
+            // 
+            this.ExpandColumnsCheckBox.AutoSize = true;
+            this.ExpandColumnsCheckBox.Location = new System.Drawing.Point(150, 109);
+            this.ExpandColumnsCheckBox.Name = "ExpandColumnsCheckBox";
+            this.ExpandColumnsCheckBox.Size = new System.Drawing.Size(104, 17);
+            this.ExpandColumnsCheckBox.TabIndex = 13;
+            this.ExpandColumnsCheckBox.Text = "Expand columns";
+            this.ExpandColumnsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // ConventionalReadButton
+            // 
+            this.ConventionalReadButton.Location = new System.Drawing.Point(12, 105);
+            this.ConventionalReadButton.Name = "ConventionalReadButton";
+            this.ConventionalReadButton.Size = new System.Drawing.Size(132, 23);
+            this.ConventionalReadButton.TabIndex = 12;
+            this.ConventionalReadButton.Text = "Conventional";
+            this.ConventionalReadButton.UseVisualStyleBackColor = true;
+            this.ConventionalReadButton.Click += new System.EventHandler(this.ConventionalReadButton_Click);
             // 
             // Example5Button
             // 
-            this.Example5Button.Location = new System.Drawing.Point(564, 13);
+            this.Example5Button.Location = new System.Drawing.Point(150, 47);
             this.Example5Button.Name = "Example5Button";
             this.Example5Button.Size = new System.Drawing.Size(132, 23);
             this.Example5Button.TabIndex = 11;
@@ -197,7 +232,7 @@
             // 
             this.ElapsedTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ElapsedTimeLabel.AutoSize = true;
-            this.ElapsedTimeLabel.Location = new System.Drawing.Point(781, 52);
+            this.ElapsedTimeLabel.Location = new System.Drawing.Point(785, 18);
             this.ElapsedTimeLabel.Name = "ElapsedTimeLabel";
             this.ElapsedTimeLabel.Size = new System.Drawing.Size(49, 13);
             this.ElapsedTimeLabel.TabIndex = 10;
@@ -207,7 +242,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(708, 52);
+            this.label1.Location = new System.Drawing.Point(712, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 9;
@@ -215,7 +250,7 @@
             // 
             // Example4Button
             // 
-            this.Example4Button.Location = new System.Drawing.Point(426, 13);
+            this.Example4Button.Location = new System.Drawing.Point(150, 13);
             this.Example4Button.Name = "Example4Button";
             this.Example4Button.Size = new System.Drawing.Size(132, 23);
             this.Example4Button.TabIndex = 8;
@@ -225,7 +260,7 @@
             // 
             // Example3Button
             // 
-            this.Example3Button.Location = new System.Drawing.Point(288, 13);
+            this.Example3Button.Location = new System.Drawing.Point(12, 76);
             this.Example3Button.Name = "Example3Button";
             this.Example3Button.Size = new System.Drawing.Size(132, 23);
             this.Example3Button.TabIndex = 7;
@@ -235,7 +270,7 @@
             // 
             // Example2Button
             // 
-            this.Example2Button.Location = new System.Drawing.Point(150, 13);
+            this.Example2Button.Location = new System.Drawing.Point(12, 47);
             this.Example2Button.Name = "Example2Button";
             this.Example2Button.Size = new System.Drawing.Size(132, 23);
             this.Example2Button.TabIndex = 6;
@@ -255,7 +290,7 @@
             // 
             // Example5aButton
             // 
-            this.Example5aButton.Location = new System.Drawing.Point(702, 13);
+            this.Example5aButton.Location = new System.Drawing.Point(150, 76);
             this.Example5aButton.Name = "Example5aButton";
             this.Example5aButton.Size = new System.Drawing.Size(132, 23);
             this.Example5aButton.TabIndex = 3;
@@ -269,7 +304,7 @@
             this.PleaseWaitPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PleaseWaitPanel.Location = new System.Drawing.Point(0, 25);
             this.PleaseWaitPanel.Name = "PleaseWaitPanel";
-            this.PleaseWaitPanel.Size = new System.Drawing.Size(848, 283);
+            this.PleaseWaitPanel.Size = new System.Drawing.Size(848, 287);
             this.PleaseWaitPanel.TabIndex = 3;
             // 
             // PleaseWaitLabel
@@ -281,41 +316,41 @@
             this.PleaseWaitLabel.TabIndex = 0;
             this.PleaseWaitLabel.Text = "Loading data please wait";
             // 
-            // ConventionalReadButton
+            // Example1WithCancelButton
             // 
-            this.ConventionalReadButton.Location = new System.Drawing.Point(12, 47);
-            this.ConventionalReadButton.Name = "ConventionalReadButton";
-            this.ConventionalReadButton.Size = new System.Drawing.Size(132, 23);
-            this.ConventionalReadButton.TabIndex = 12;
-            this.ConventionalReadButton.Text = "Conventional";
-            this.ConventionalReadButton.UseVisualStyleBackColor = true;
-            this.ConventionalReadButton.Click += new System.EventHandler(this.ConventionalReadButton_Click);
+            this.Example1WithCancelButton.Location = new System.Drawing.Point(20, 19);
+            this.Example1WithCancelButton.Name = "Example1WithCancelButton";
+            this.Example1WithCancelButton.Size = new System.Drawing.Size(132, 23);
+            this.Example1WithCancelButton.TabIndex = 14;
+            this.Example1WithCancelButton.Text = "Example 1 with cancel";
+            this.Example1WithCancelButton.UseVisualStyleBackColor = true;
+            this.Example1WithCancelButton.Click += new System.EventHandler(this.Example1WithCancelButton_Click);
             // 
-            // ExpandColumnsCheckBox
+            // CancelExample1Button
             // 
-            this.ExpandColumnsCheckBox.AutoSize = true;
-            this.ExpandColumnsCheckBox.Location = new System.Drawing.Point(150, 52);
-            this.ExpandColumnsCheckBox.Name = "ExpandColumnsCheckBox";
-            this.ExpandColumnsCheckBox.Size = new System.Drawing.Size(104, 17);
-            this.ExpandColumnsCheckBox.TabIndex = 13;
-            this.ExpandColumnsCheckBox.Text = "Expand columns";
-            this.ExpandColumnsCheckBox.UseVisualStyleBackColor = true;
+            this.CancelExample1Button.Location = new System.Drawing.Point(20, 48);
+            this.CancelExample1Button.Name = "CancelExample1Button";
+            this.CancelExample1Button.Size = new System.Drawing.Size(132, 23);
+            this.CancelExample1Button.TabIndex = 15;
+            this.CancelExample1Button.Text = "Cancel";
+            this.CancelExample1Button.UseVisualStyleBackColor = true;
+            this.CancelExample1Button.Click += new System.EventHandler(this.CancelExample1Button_Click);
             // 
-            // toolStripButton1
+            // groupBox1
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.groupBox1.Controls.Add(this.CancelExample1Button);
+            this.groupBox1.Controls.Add(this.Example1WithCancelButton);
+            this.groupBox1.Location = new System.Drawing.Point(290, 13);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(173, 86);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 399);
+            this.ClientSize = new System.Drawing.Size(848, 465);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.PleaseWaitPanel);
             this.Controls.Add(this.panel1);
@@ -331,6 +366,7 @@
             this.panel1.PerformLayout();
             this.PleaseWaitPanel.ResumeLayout(false);
             this.PleaseWaitPanel.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,6 +399,9 @@
         private System.Windows.Forms.Button ConventionalReadButton;
         private System.Windows.Forms.CheckBox ExpandColumnsCheckBox;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.Button Example1WithCancelButton;
+        private System.Windows.Forms.Button CancelExample1Button;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

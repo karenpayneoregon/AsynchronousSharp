@@ -19,10 +19,14 @@ namespace DataGridViewLoadDelimitedFileAsynchronous
 {
     public partial class Form1 : Form
     {
-        private CancellationTokenSource _cts = new CancellationTokenSource();
+
+        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+
         private readonly BindingSource _customersBindingSource = new BindingSource();
         BindingList<Customer> _customerBindingListView = new BindingList<Customer>();
+
         private string _fileNameToReadFrom = "customersLarge.csv";
+
         private int _delayIndex = 0;
 
         public Form1()
@@ -42,7 +46,6 @@ namespace DataGridViewLoadDelimitedFileAsynchronous
         }
 
 
-
         /// <summary>
         /// Read file using StreamReader.ReadLineAsync, create a new customer in each
         /// iteration in a while statement.
@@ -56,13 +59,9 @@ namespace DataGridViewLoadDelimitedFileAsynchronous
         /// <param name="e"></param>
         private async void Example1Button_Click(object sender, EventArgs e)
         {
-            if (_cts.IsCancellationRequested == true)
-            {
-                _cts.Dispose();
-                _cts = new CancellationTokenSource();
-            }
+
             //dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
-            var waitForm = new WaitForm() { TopLevel = true, TopMost = true};
+            var waitForm = new WaitForm() { TopLevel = true, TopMost = true };
 
             waitForm.Show(this);
             waitForm.Top = (Top + (Height / 2)) - waitForm.Height / 2;
@@ -104,6 +103,64 @@ namespace DataGridViewLoadDelimitedFileAsynchronous
 
             ElapsedTimeLabel.Invoke((MethodInvoker)(() => ElapsedTimeLabel.Text = watch.Elapsed.ToString("mm\\:ss\\.ff")));
 
+        }
+        /// <summary>
+        /// Simple example for cancelling an async operation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void Example1WithCancelButton_Click(object sender, EventArgs e)
+        {
+            if (_cancellationTokenSource.IsCancellationRequested == true)
+            {
+                _cancellationTokenSource.Dispose();
+                _cancellationTokenSource = new CancellationTokenSource();
+            }
+
+            bindingNavigator1.BindingSource = null;
+
+            _customerBindingListView = new SortableBindingList<Customer>(new List<Customer>());
+            _customersBindingSource.DataSource = _customerBindingListView;
+            dataGridView1.DataSource = _customersBindingSource;
+
+            int index = 0;
+
+            try
+            {
+                foreach (var line in FileReader.ParseFile(_fileNameToReadFrom, _cancellationTokenSource.Token))
+                {
+                    var lineParts = line.Result.Split(',');
+
+                    if (index % _delayIndex == 0)
+                    {
+                        await Task.Delay(1);
+                    }
+
+                    _customerBindingListView.Add(
+                        new Customer()
+                        {
+                            CustomerIdentifier = Convert.ToInt32(lineParts[0]),
+                            CompanyName = lineParts[1],
+                            ContactName = lineParts[2],
+                            ContactTitle = lineParts[3],
+                            City = lineParts[4],
+                            Country = lineParts[5]
+                        });
+
+                    index += 10;
+                }
+
+                bindingNavigator1.BindingSource = _customersBindingSource;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Cancelled");
+            }
+
+            if (_customersBindingSource.Count >0)
+            {
+                bindingNavigator1.BindingSource = _customersBindingSource;
+            }
         }
 
         private async void Example2Button_Click(object sender, EventArgs e)
@@ -350,7 +407,7 @@ namespace DataGridViewLoadDelimitedFileAsynchronous
 
         private void ConventionalReadButton_Click(object sender, EventArgs e)
         {
-            
+
             _customerBindingListView = null;
             dataGridView1.DataSource = null;
 
@@ -374,13 +431,18 @@ namespace DataGridViewLoadDelimitedFileAsynchronous
                 dataGridView1.ExpandColumns();
                 dataGridView1.ResumeLayout();
             }
-            
+
             ElapsedTimeLabel.Text = watch.Elapsed.ToString("mm\\:ss\\.ff");
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Hello");
+        }
+
+        private void CancelExample1Button_Click(object sender, EventArgs e)
+        {
+            _cancellationTokenSource.Cancel();
         }
     }
 }

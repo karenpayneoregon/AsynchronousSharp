@@ -64,6 +64,13 @@ namespace FileLibrary
 
             //return ReadAllLinesAsync2(path, 50);
         }
+        public static Task<Customer[]> ReadAllLinesAsyncWithCancellation(string path)
+        {
+            //return ReadAllLinesAsync1(path, Encoding.UTF8);
+            return ReadAllLinesAsync3(path, Encoding.UTF8);
+
+            //return ReadAllLinesAsync2(path, 50);
+        }
 
         public static async Task<Customer[]> ReadAllLinesAsync1(string path, Encoding encoding)
         {
@@ -173,6 +180,44 @@ namespace FileLibrary
 
             return customers.ToArray();
         }
+        public static async Task<Customer[]> ReadAllLinesAsync3(string path, Encoding encoding, CancellationToken ct)
+        {
+            var index = 0;
+            var customers = new List<Customer>();
+
+            using (var reader = new StreamReader(path))
+            {
+                var text = await reader.ReadToEndAsync();
+                var lines = text.Split('\n');
+                foreach (var line in lines)
+                {
+                    //if (index % 1000 == 0)
+                    //{
+                    //    await Task.Delay(1);
+                    //}
+                    var lineParts = line.Split(',');
+                    customers.Add(new Customer()
+                    {
+                        CustomerIdentifier = Convert.ToInt32(lineParts[0]),
+                        CompanyName = lineParts[1],
+                        ContactName = lineParts[2],
+                        ContactTitle = lineParts[3],
+                        City = lineParts[4],
+                        Country = lineParts[5]
+                    });
+
+                    if (ct.IsCancellationRequested)
+                    {
+                        ct.ThrowIfCancellationRequested();
+                    }
+
+                    index += 5;
+                }
+
+            }
+
+            return customers.ToArray();
+        }
 
         public static async Task<string> GetContentAsync(string path)
         {
@@ -195,6 +240,49 @@ namespace FileLibrary
                     Task<string> readLineTask = null;
                     try
                     {
+                        readLineTask = ReadAndParseAsync(reader);
+                        yield return readLineTask;
+                    }
+                    finally
+                    {
+                        // There are three ways we can end up here:
+                        //  1) an exception occurred (in which case readLineTask may still be null)
+                        //  2) The caller asked for the next item (in which case execution will resume
+                        //      from the yield return, and we'll try another loop iteration
+                        //  3) The caller has decided to stop early, calling Dispose on the enumerator
+                        //      before reaching the end
+                        // If it's either 2 or 3 (i.e., we have a non-null readLineTask), we need to ensure
+                        // that the last task we created is complete. (In case 2, we need it to be complete
+                        // because we can't test for EndOfStream, nor can we go on to begin another read until
+                        // the last read finishes. In case 3, we need to ensure that the read completes before
+                        // we dispose the StreamReader.)
+                        // Hopefully the caller already awaited the task for us. But if they didn't we need to
+                        // block now until it completes.
+                        if (readLineTask?.IsCompleted == false)
+                        {
+                            // Calling Wait is almost always a terrible idea. But we've been
+                            // forced into this by the mismatch between our return type, and the
+                            // nature of the work we're doing.
+                            readLineTask.Wait();
+                        }
+                    }
+                }
+            }
+        }
+        public static IEnumerable<Task<string>> ParseFile(string path, CancellationToken ct)
+        {
+            using (var reader = new StreamReader(path))
+            {
+                while (!reader.EndOfStream)
+                {
+                    Task<string> readLineTask = null;
+                    try
+                    {
+                        if (ct.IsCancellationRequested)
+                        {
+                            ct.ThrowIfCancellationRequested();
+                        }
+
                         readLineTask = ReadAndParseAsync(reader);
                         yield return readLineTask;
                     }
