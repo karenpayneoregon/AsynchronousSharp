@@ -154,14 +154,17 @@ namespace FileLibrary
 
             using (var reader = new StreamReader(path))
             {
+
                 var text = await reader.ReadToEndAsync();
                 var lines = text.Split('\n');
+
                 foreach (var line in lines)
                 {
                     //if (index % 1000 == 0)
                     //{
                     //    await Task.Delay(1);
                     //}
+
                     var lineParts = line.Split(',');
                     customers.Add(new Customer()
                     {

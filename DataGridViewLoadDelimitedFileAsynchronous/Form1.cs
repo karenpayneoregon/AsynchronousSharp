@@ -421,6 +421,7 @@ namespace DataGridViewLoadDelimitedFileAsynchronous
             _customerBindingListView = new SortableBindingList<Customer>(customers);
             _customersBindingSource.DataSource = _customerBindingListView;
             dataGridView1.DataSource = _customersBindingSource;
+            dataGridView1.Columns["CustomerIdentifier"].Visible = false;
 
             /*
              * SuspendLayout and ResumeLayout will not really help
