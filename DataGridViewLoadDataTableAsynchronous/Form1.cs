@@ -28,16 +28,18 @@ namespace DataGridViewLoadDataTableAsynchronous
 
         private async void Form1_Shown(object sender, EventArgs e)
         {
-            var waitForm = new WaitForm() {TopLevel =  true, TopMost = true};
-            waitForm.Show();
-            try
-            {
-                _customersBindingSource = new BindingSourceDataTable { DataSource = await _operations.LoadCustomerData() };
-            }
-            finally
-            {
-                waitForm.Dispose();
-            }
+            //var waitForm = new WaitForm() {TopLevel =  true, TopMost = true};
+            //waitForm.Show();
+            //try
+            //{
+            //    _customersBindingSource = new BindingSourceDataTable { DataSource = await _operations.LoadCustomerData() };
+            //}
+            //finally
+            //{
+            //    waitForm.Dispose();
+            //}
+
+            _customersBindingSource = new BindingSourceDataTable { DataSource = await _operations.LoadCustomerData() };
 
             if ( _operations.IsSuccessFul)
             {
