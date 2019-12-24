@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ExtensionsGeneralLibrary;
 using FileLibrary;
 using FileLibrary.Classes;
 using WinFormsComponentLibrary;
@@ -32,6 +33,7 @@ namespace DataGridViewLoadDelimitedFileAsynchronous
         public Form1()
         {
             InitializeComponent();
+
 
             dataGridView1.RowHeadersVisible = false;
 
@@ -444,6 +446,52 @@ namespace DataGridViewLoadDelimitedFileAsynchronous
         private void CancelExample1Button_Click(object sender, EventArgs e)
         {
             _cancellationTokenSource.Cancel();
+        }
+
+        private void ContinueWith1Button_Click(object sender, EventArgs e)
+        {
+            var customers = new List<Customer>();
+            CustomersComoBox.DataSource = null;
+
+            // read lines in file
+            var loadLinesTask = Task.Run(() =>
+            {
+                var lines = File.ReadAllLines(_fileNameToReadFrom);
+                return lines;
+            });
+
+            // populate customer list
+            var processStacksTask = loadLinesTask.ContinueWith( lineTask =>
+            {
+                var lines = lineTask.Result;
+                foreach (var line in lines)
+                {
+                    var lineParts = line.Split(',');
+                    customers.Add(new Customer()
+                    {
+                        CustomerIdentifier = Convert.ToInt32(lineParts[0]),
+                        CompanyName = lineParts[1],
+                        ContactName = lineParts[2],
+                        ContactTitle = lineParts[3],
+                        City = lineParts[4],
+                        Country = lineParts[5]
+                    });
+                }
+            }, TaskContinuationOptions.OnlyOnRanToCompletion);
+
+            // report exceptions
+            loadLinesTask.ContinueWith(t =>
+            {
+                MessageBox.Show(t.Exception.GetExceptionMessages());
+
+            }, TaskContinuationOptions.OnlyOnFaulted);
+
+            // notify we are finished
+            processStacksTask.ContinueWith( _ =>
+            {
+                CustomersComoBox.Invoke((MethodInvoker)(() => CustomersComoBox.DataSource = customers));
+                MessageBox.Show($"Finished loading customers: {customers.Count()}");
+            }, TaskContinuationOptions.OnlyOnRanToCompletion);
         }
     }
 }

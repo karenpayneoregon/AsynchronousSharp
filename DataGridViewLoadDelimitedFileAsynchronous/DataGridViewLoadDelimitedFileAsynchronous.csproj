@@ -97,6 +97,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExtensionsGeneralLibrary\ExtensionsGeneralLibrary.csproj">
+      <Project>{58AEB6F6-0DE9-47F0-ACB6-795FD9439D7C}</Project>
+      <Name>ExtensionsGeneralLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FileLibrary\FileLibrary.csproj">
       <Project>{c82274ec-03a0-4886-af3d-a67930394de0}</Project>
       <Name>FileLibrary</Name>

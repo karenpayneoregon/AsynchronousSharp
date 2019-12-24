@@ -43,6 +43,10 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ContinueWith1Button = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CancelExample1Button = new System.Windows.Forms.Button();
+            this.Example1WithCancelButton = new System.Windows.Forms.Button();
             this.ExpandColumnsCheckBox = new System.Windows.Forms.CheckBox();
             this.ConventionalReadButton = new System.Windows.Forms.Button();
             this.Example5Button = new System.Windows.Forms.Button();
@@ -55,15 +59,13 @@
             this.Example5aButton = new System.Windows.Forms.Button();
             this.PleaseWaitPanel = new System.Windows.Forms.Panel();
             this.PleaseWaitLabel = new System.Windows.Forms.Label();
-            this.Example1WithCancelButton = new System.Windows.Forms.Button();
-            this.CancelExample1Button = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CustomersComoBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.PleaseWaitPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.PleaseWaitPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -72,7 +74,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 25);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(848, 287);
+            this.dataGridView1.Size = new System.Drawing.Size(848, 262);
             this.dataGridView1.TabIndex = 0;
             // 
             // bindingNavigator1
@@ -181,6 +183,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.CustomersComoBox);
+            this.panel1.Controls.Add(this.ContinueWith1Button);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.ExpandColumnsCheckBox);
             this.panel1.Controls.Add(this.ConventionalReadButton);
@@ -193,10 +197,50 @@
             this.panel1.Controls.Add(this.Example1Button);
             this.panel1.Controls.Add(this.Example5aButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 312);
+            this.panel1.Location = new System.Drawing.Point(0, 287);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(848, 153);
+            this.panel1.Size = new System.Drawing.Size(848, 178);
             this.panel1.TabIndex = 2;
+            // 
+            // ContinueWith1Button
+            // 
+            this.ContinueWith1Button.Location = new System.Drawing.Point(480, 13);
+            this.ContinueWith1Button.Name = "ContinueWith1Button";
+            this.ContinueWith1Button.Size = new System.Drawing.Size(132, 23);
+            this.ContinueWith1Button.TabIndex = 17;
+            this.ContinueWith1Button.Text = "Example ContineWith 1";
+            this.ContinueWith1Button.UseVisualStyleBackColor = true;
+            this.ContinueWith1Button.Click += new System.EventHandler(this.ContinueWith1Button_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.CancelExample1Button);
+            this.groupBox1.Controls.Add(this.Example1WithCancelButton);
+            this.groupBox1.Location = new System.Drawing.Point(290, 13);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(173, 86);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            // 
+            // CancelExample1Button
+            // 
+            this.CancelExample1Button.Location = new System.Drawing.Point(20, 48);
+            this.CancelExample1Button.Name = "CancelExample1Button";
+            this.CancelExample1Button.Size = new System.Drawing.Size(132, 23);
+            this.CancelExample1Button.TabIndex = 15;
+            this.CancelExample1Button.Text = "Cancel";
+            this.CancelExample1Button.UseVisualStyleBackColor = true;
+            this.CancelExample1Button.Click += new System.EventHandler(this.CancelExample1Button_Click);
+            // 
+            // Example1WithCancelButton
+            // 
+            this.Example1WithCancelButton.Location = new System.Drawing.Point(20, 19);
+            this.Example1WithCancelButton.Name = "Example1WithCancelButton";
+            this.Example1WithCancelButton.Size = new System.Drawing.Size(132, 23);
+            this.Example1WithCancelButton.TabIndex = 14;
+            this.Example1WithCancelButton.Text = "Example 1 with cancel";
+            this.Example1WithCancelButton.UseVisualStyleBackColor = true;
+            this.Example1WithCancelButton.Click += new System.EventHandler(this.Example1WithCancelButton_Click);
             // 
             // ExpandColumnsCheckBox
             // 
@@ -304,7 +348,7 @@
             this.PleaseWaitPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PleaseWaitPanel.Location = new System.Drawing.Point(0, 25);
             this.PleaseWaitPanel.Name = "PleaseWaitPanel";
-            this.PleaseWaitPanel.Size = new System.Drawing.Size(848, 287);
+            this.PleaseWaitPanel.Size = new System.Drawing.Size(848, 262);
             this.PleaseWaitPanel.TabIndex = 3;
             // 
             // PleaseWaitLabel
@@ -316,35 +360,13 @@
             this.PleaseWaitLabel.TabIndex = 0;
             this.PleaseWaitLabel.Text = "Loading data please wait";
             // 
-            // Example1WithCancelButton
+            // CustomersComoBox
             // 
-            this.Example1WithCancelButton.Location = new System.Drawing.Point(20, 19);
-            this.Example1WithCancelButton.Name = "Example1WithCancelButton";
-            this.Example1WithCancelButton.Size = new System.Drawing.Size(132, 23);
-            this.Example1WithCancelButton.TabIndex = 14;
-            this.Example1WithCancelButton.Text = "Example 1 with cancel";
-            this.Example1WithCancelButton.UseVisualStyleBackColor = true;
-            this.Example1WithCancelButton.Click += new System.EventHandler(this.Example1WithCancelButton_Click);
-            // 
-            // CancelExample1Button
-            // 
-            this.CancelExample1Button.Location = new System.Drawing.Point(20, 48);
-            this.CancelExample1Button.Name = "CancelExample1Button";
-            this.CancelExample1Button.Size = new System.Drawing.Size(132, 23);
-            this.CancelExample1Button.TabIndex = 15;
-            this.CancelExample1Button.Text = "Cancel";
-            this.CancelExample1Button.UseVisualStyleBackColor = true;
-            this.CancelExample1Button.Click += new System.EventHandler(this.CancelExample1Button_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.CancelExample1Button);
-            this.groupBox1.Controls.Add(this.Example1WithCancelButton);
-            this.groupBox1.Location = new System.Drawing.Point(290, 13);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(173, 86);
-            this.groupBox1.TabIndex = 16;
-            this.groupBox1.TabStop = false;
+            this.CustomersComoBox.FormattingEnabled = true;
+            this.CustomersComoBox.Location = new System.Drawing.Point(480, 42);
+            this.CustomersComoBox.Name = "CustomersComoBox";
+            this.CustomersComoBox.Size = new System.Drawing.Size(132, 21);
+            this.CustomersComoBox.TabIndex = 18;
             // 
             // Form1
             // 
@@ -364,9 +386,9 @@
             this.bindingNavigator1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.PleaseWaitPanel.ResumeLayout(false);
             this.PleaseWaitPanel.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -402,6 +424,8 @@
         private System.Windows.Forms.Button Example1WithCancelButton;
         private System.Windows.Forms.Button CancelExample1Button;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button ContinueWith1Button;
+        private System.Windows.Forms.ComboBox CustomersComoBox;
     }
 }
 
