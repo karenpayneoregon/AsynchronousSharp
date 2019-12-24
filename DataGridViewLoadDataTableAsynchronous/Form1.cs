@@ -90,17 +90,6 @@ namespace DataGridViewLoadDataTableAsynchronous
 
             }
         }
-        /// <summary>
-        /// Prompt for removing the current row
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
-        {
-            if (Question($"Remove '{_customersBindingSource.CurrentDataRow().Field<string>("CompanyName")}' ?"))
-            {
-                //
-            }
-        }
+
     }
 }

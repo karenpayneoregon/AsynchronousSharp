@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Classes\ContactType.cs" />
     <Compile Include="Classes\Customer.cs" />
+    <Compile Include="Classes\Person.cs" />
     <Compile Include="Operations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
