@@ -150,24 +150,27 @@ namespace SqlServerLibrary
 
                             if (ct.IsCancellationRequested)
                             {
+
                                 if (personList.Count >0)
                                 {
                                     return personList;
                                 }
+
                                 ct.ThrowIfCancellationRequested();
                             }
 
                         }
                     }
-                    catch (Exception ex)
+                    catch (OperationCanceledException)
                     {
+                        // operation has been cancelled by user
+                        throw;
+                    }
+                    catch (Exception exception)
+                    {
+                        // none-cancel exception
                         mHasException = true;
-                        mLastException = ex;
-
-                        if (ct.IsCancellationRequested)
-                        {
-                            throw ex;
-                        }
+                        mLastException = exception;
                     }
                 }
             }

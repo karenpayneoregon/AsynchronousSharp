@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SqlServerLibrary;
+using SqlServerLibrary.Classes;
 using WinFormsComponentLibrary;
 using WinFormsExtensionsLibrary;
 
@@ -35,23 +36,55 @@ namespace DataGridViewLoadDataTableAsynchronous
 
             try
             {
-                _contactsBindingSource = new BindingSourceDataTable { DataSource = await _operations.LoadPeopleAsyncWithCancellationTask(progress, _cancellationTokenSource.Token) };
+                _contactsBindingSource = new BindingSourceDataTable {DataSource = await _operations.LoadPeopleAsyncWithCancellationTask(progress, _cancellationTokenSource.Token)};
                 if (_operations.IsSuccessFul)
                 {
+                    
                     dataGridView1.DataSource = _contactsBindingSource;
                     bindingNavigator1.BindingSource = _contactsBindingSource;
 
                     _contactsBindingSource.Sort = "LastName";
+
+                    dataGridView1.Columns["id"].Visible = false;
                     dataGridView1.DataError += DataGridView1_DataError;
                     dataGridView1.ExpandColumns();
 
-                }
+                    if (_cancellationTokenSource.IsCancellationRequested)
+                    {
+                        MessageBox.Show($"Operation cancelled with {_contactsBindingSource.Count} of {_recordCount} records.");
+                    }
 
-                dataGridView1.DataError += DataGridView1_DataError;
+                    dataGridView1.KeyDown += DataGridView1_KeyDown;
+                    ActiveControl = dataGridView1;
+
+                }
+                else
+                {
+                    MessageBox.Show(_operations.LastExceptionMessage);
+                }                
             }
-            catch (Exception ex)
+            catch (OperationCanceledException)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Loading of data has been cancelled");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show($"Encountered issues\n{exception.Message}");
+            }
+        }
+        /// <summary>
+        /// Show how to access the current row as a Person which can be used
+        /// for editing the record in a child form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter && _contactsBindingSource.Current != null)
+            {
+                e.Handled = true;
+                var person = (Person) _contactsBindingSource.Current;
+                MessageBox.Show($"{person.Id}");
             }
         }
 
