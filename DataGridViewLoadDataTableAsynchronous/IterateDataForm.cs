@@ -80,11 +80,20 @@ namespace DataGridViewLoadDataTableAsynchronous
         /// <param name="e"></param>
         private void DataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter && _contactsBindingSource.Current != null)
+            if (_contactsBindingSource.Current == null)
             {
-                e.Handled = true;
-                var person = (Person) _contactsBindingSource.Current;
-                MessageBox.Show($"{person.Id}");
+                return;                
+            }
+
+            var person = (Person)_contactsBindingSource.Current;
+
+            if (e.KeyData == Keys.Enter)
+            {
+                e.Handled = true;                
+                MessageBox.Show($"Edit {person.Id}");
+            }else if (e.KeyData == Keys.Delete)
+            {
+                MessageBox.Show($"Delete {person.Id}");
             }
         }
 
