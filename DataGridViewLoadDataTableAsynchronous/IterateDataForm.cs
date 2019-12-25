@@ -74,7 +74,8 @@ namespace DataGridViewLoadDataTableAsynchronous
         }
         /// <summary>
         /// Show how to access the current row as a Person which can be used
-        /// for editing the record in a child form.
+        /// for editing the record in a child form or delete the current row.
+        /// Note there are other ways to handle delete via the DataGridView.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -96,7 +97,17 @@ namespace DataGridViewLoadDataTableAsynchronous
                 MessageBox.Show($"Delete {person.Id}");
             }
         }
+        private void DeleteCurrentRowtoolStripButton1_Click(object sender, EventArgs e)
+        {
+            if (_contactsBindingSource.Current == null)
+            {
+                return;
+            }
 
+            var person = (Person)_contactsBindingSource.Current;
+            MessageBox.Show($"Delete {person.Id}");
+
+        }
         private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             if (e.Exception.Message.Contains("does not allow nulls."))
@@ -126,5 +137,6 @@ namespace DataGridViewLoadDataTableAsynchronous
         {
             _cancellationTokenSource.Cancel();
         }
+
     }
 }

@@ -44,6 +44,7 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.DeleteCurrentRowtoolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -93,7 +94,8 @@
             this.bindingNavigatorSeparator1,
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2});
+            this.bindingNavigatorSeparator2,
+            this.DeleteCurrentRowtoolStripButton1});
             this.bindingNavigator1.Location = new System.Drawing.Point(0, 0);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -186,6 +188,16 @@
             this.dataGridView1.Size = new System.Drawing.Size(800, 367);
             this.dataGridView1.TabIndex = 4;
             // 
+            // DeleteCurrentRowtoolStripButton1
+            // 
+            this.DeleteCurrentRowtoolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DeleteCurrentRowtoolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("DeleteCurrentRowtoolStripButton1.Image")));
+            this.DeleteCurrentRowtoolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DeleteCurrentRowtoolStripButton1.Name = "DeleteCurrentRowtoolStripButton1";
+            this.DeleteCurrentRowtoolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.DeleteCurrentRowtoolStripButton1.Text = "Delete current row";
+            this.DeleteCurrentRowtoolStripButton1.Click += new System.EventHandler(this.DeleteCurrentRowtoolStripButton1_Click);
+            // 
             // IterateDataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -225,5 +237,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.ToolStripButton DeleteCurrentRowtoolStripButton1;
     }
 }
