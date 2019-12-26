@@ -31,11 +31,12 @@
             this.ProcessAsync1Button = new System.Windows.Forms.Button();
             this.CancelExample1Button = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ProcessStatus1Label = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ProcessStatus2Label = new System.Windows.Forms.Label();
             this.CancelExample2Button = new System.Windows.Forms.Button();
             this.ProcessAsync2Button = new System.Windows.Forms.Button();
-            this.ProcessStatus1Label = new System.Windows.Forms.Label();
-            this.ProcessStatus2Label = new System.Windows.Forms.Label();
+            this.IterateFolderButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +73,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Process Async 1";
             // 
+            // ProcessStatus1Label
+            // 
+            this.ProcessStatus1Label.AutoSize = true;
+            this.ProcessStatus1Label.Location = new System.Drawing.Point(236, 25);
+            this.ProcessStatus1Label.Name = "ProcessStatus1Label";
+            this.ProcessStatus1Label.Size = new System.Drawing.Size(25, 13);
+            this.ProcessStatus1Label.TabIndex = 2;
+            this.ProcessStatus1Label.Text = "000";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.ProcessStatus2Label);
@@ -83,6 +93,15 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Process Async 2";
+            // 
+            // ProcessStatus2Label
+            // 
+            this.ProcessStatus2Label.AutoSize = true;
+            this.ProcessStatus2Label.Location = new System.Drawing.Point(236, 24);
+            this.ProcessStatus2Label.Name = "ProcessStatus2Label";
+            this.ProcessStatus2Label.Size = new System.Drawing.Size(25, 13);
+            this.ProcessStatus2Label.TabIndex = 3;
+            this.ProcessStatus2Label.Text = "000";
             // 
             // CancelExample2Button
             // 
@@ -104,29 +123,22 @@
             this.ProcessAsync2Button.UseVisualStyleBackColor = true;
             this.ProcessAsync2Button.Click += new System.EventHandler(this.ProcessAsync2Button_Click);
             // 
-            // ProcessStatus1Label
+            // IterateFolderButton
             // 
-            this.ProcessStatus1Label.AutoSize = true;
-            this.ProcessStatus1Label.Location = new System.Drawing.Point(236, 25);
-            this.ProcessStatus1Label.Name = "ProcessStatus1Label";
-            this.ProcessStatus1Label.Size = new System.Drawing.Size(25, 13);
-            this.ProcessStatus1Label.TabIndex = 2;
-            this.ProcessStatus1Label.Text = "000";
-            // 
-            // ProcessStatus2Label
-            // 
-            this.ProcessStatus2Label.AutoSize = true;
-            this.ProcessStatus2Label.Location = new System.Drawing.Point(236, 24);
-            this.ProcessStatus2Label.Name = "ProcessStatus2Label";
-            this.ProcessStatus2Label.Size = new System.Drawing.Size(25, 13);
-            this.ProcessStatus2Label.TabIndex = 3;
-            this.ProcessStatus2Label.Text = "000";
+            this.IterateFolderButton.Location = new System.Drawing.Point(40, 95);
+            this.IterateFolderButton.Name = "IterateFolderButton";
+            this.IterateFolderButton.Size = new System.Drawing.Size(98, 23);
+            this.IterateFolderButton.TabIndex = 4;
+            this.IterateFolderButton.Text = "Iterate folder";
+            this.IterateFolderButton.UseVisualStyleBackColor = true;
+            this.IterateFolderButton.Click += new System.EventHandler(this.IterateFolderButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 108);
+            this.ClientSize = new System.Drawing.Size(582, 153);
+            this.Controls.Add(this.IterateFolderButton);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -151,6 +163,7 @@
         private System.Windows.Forms.Button ProcessAsync2Button;
         private System.Windows.Forms.Label ProcessStatus1Label;
         private System.Windows.Forms.Label ProcessStatus2Label;
+        private System.Windows.Forms.Button IterateFolderButton;
     }
 }
 

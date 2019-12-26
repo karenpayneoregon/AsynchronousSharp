@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -129,6 +130,25 @@ namespace CodeSnippets
         {
             ProcessStatus2Label.Text = args.ToString();
             ProcessStatus2Label.InvokeIfRequired(d => { ProcessStatus2Label.Text = args.ToString(); });
+        }
+        /// <summary>
+        /// Wrap synchronous operation in a task
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private  async void IterateFolderButton_Click(object sender, EventArgs e)
+        {
+            var rootFolder = "C:\\Dotnet_Development\\VS2017\\TechNet";
+
+            if (!Directory.Exists(rootFolder)) return;
+
+            var result = await Task.Run(() => DirectoryLibrary.GetFileList("*.cs", rootFolder));
+
+            foreach (FileInfo item in result)
+            {
+                Console.WriteLine($"{item.DirectoryName}\\{item.Name}");
+            }
+
         }
     }
 }
