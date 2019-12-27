@@ -98,12 +98,12 @@ namespace FileLibrary
                             Country = lineParts[5]
                         });
 
-
                     }
                 }
             }
 
             return customers.ToArray();
+
         }
         public static async Task<Customer[]> ReadAllLinesAsync2(string path, int wait)
         {
@@ -145,6 +145,7 @@ namespace FileLibrary
             }
 
             return customers.ToArray();
+
         }
 
         public static async Task<Customer[]> ReadAllLinesAsync3(string path, Encoding encoding)
@@ -315,7 +316,6 @@ namespace FileLibrary
                 }
             }
         }
-
 
     }
 }

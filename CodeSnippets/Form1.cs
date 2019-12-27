@@ -150,5 +150,42 @@ namespace CodeSnippets
             }
 
         }
+
+        public static async Task SomeDummyTaskExample(int index)
+        {
+            Console.WriteLine("Thread {0} - Start {1}", Thread.CurrentThread.ManagedThreadId, index);
+
+            await Task.Delay(1000);
+
+            Console.WriteLine("Thread {0} - End {1}", Thread.CurrentThread.ManagedThreadId, index);
+        }
+
+
+        /// <summary>
+        /// Simple Example for Task.WaitAll which updates a TextBox
+        /// via IProgress
+        ///
+        /// One task does real work while the other does no real work.
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void button1_Click(object sender, EventArgs e)
+        {
+
+            var fileName1 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Names1.txt");
+            var personArgs1 = new PersonArguments()
+            {
+                FileName = fileName1,
+                FirstName = "Rebecca",
+                LastName = "Clark"
+            };
+
+            var progress = new Progress<string>(value => textBox1.AppendText($"{value}{Environment.NewLine}") );
+            var operations = new ShortSamples();
+            await Task.Run(() => operations.Example1Async(personArgs1, progress));
+        }
+
+
     }
 }

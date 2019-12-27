@@ -37,6 +37,8 @@
             this.CancelExample2Button = new System.Windows.Forms.Button();
             this.ProcessAsync2Button = new System.Windows.Forms.Button();
             this.IterateFolderButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -125,7 +127,7 @@
             // 
             // IterateFolderButton
             // 
-            this.IterateFolderButton.Location = new System.Drawing.Point(40, 95);
+            this.IterateFolderButton.Location = new System.Drawing.Point(431, 101);
             this.IterateFolderButton.Name = "IterateFolderButton";
             this.IterateFolderButton.Size = new System.Drawing.Size(98, 23);
             this.IterateFolderButton.TabIndex = 4;
@@ -133,11 +135,32 @@
             this.IterateFolderButton.UseVisualStyleBackColor = true;
             this.IterateFolderButton.Click += new System.EventHandler(this.IterateFolderButton_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(40, 101);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(98, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Task.WaitAll";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(40, 130);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(202, 68);
+            this.textBox1.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 153);
+            this.ClientSize = new System.Drawing.Size(582, 210);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.IterateFolderButton);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -150,6 +173,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -164,6 +188,8 @@
         private System.Windows.Forms.Label ProcessStatus1Label;
         private System.Windows.Forms.Label ProcessStatus2Label;
         private System.Windows.Forms.Button IterateFolderButton;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
