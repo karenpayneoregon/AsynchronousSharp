@@ -32,18 +32,19 @@ namespace CodeSnippets.Classes
         public delegate void IndexHandler(object sender, ProcessIndexingArgs args);
         public event IndexHandler OnIterate;
 
-        /// <summary>
-        /// In this example each time await is called we go back to the captured
-        /// context after the execution of the awaited task.
-        ///
-        /// Calling ConfigureAwait(false) after the task means that we do not care
-        /// if the code after the await, runs on the captured context or not.
-        /// </summary>
-        /// <param name="loop"></param>
+        ///  <summary>
+        ///  In this example each time await is called we go back to the captured
+        ///  context after the execution of the awaited task.
+        /// 
+        ///  Calling ConfigureAwait(false) after the task means that we do not care
+        ///  if the code after the await, runs on the captured context or not.
+        ///  </summary>
+        ///  <param name="loop"></param>
+        /// <param name="ct">Valid cancellation token</param>
         /// <returns></returns>
         public async Task<int> ProcessAsync1(int loop, CancellationToken ct)
         {
-            int result = 0;
+            var result = 0;
 
             for (var index = 0; index < loop; index++)
             {

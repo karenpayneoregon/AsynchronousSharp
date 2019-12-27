@@ -200,10 +200,6 @@ namespace SqlServerLibrary
                     try
                     {
 
-                        /*
-                         * If there is an issue with the connection using
-                         * Open will freeze the user interface
-                         */
                         await cn.OpenAsync();
 
                         var reader = await cmd.ExecuteReaderAsync();
@@ -212,7 +208,8 @@ namespace SqlServerLibrary
                         while (await reader.ReadAsync())
                         {
 
-                            await Task.Delay(1000); // for demo purposes only
+                            await Task.Delay(1000);
+
                             progress.Report(index.ToString());
 
                             contactList.Add(new ContactType()

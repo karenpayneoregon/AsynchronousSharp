@@ -13,17 +13,17 @@ namespace CodeSnippets.Classes
         CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         CancellationToken _cancellationToken = new CancellationToken();
 
-        public async Task Example1Async(PersonArguments pa, IProgress<string> progress)
+        public async Task Example1Async(PersonArguments personArguments, IProgress<string> progress) 
         {
             Task<Person> taskOne = await Task.Factory.StartNew(async () =>
             {
                 var person = new Person() {Id = -1};
 
-                var lines = File.ReadAllLines(pa.FileName);
-                for (int index = 0; index < lines.Length -1; index++)
+                var lines = File.ReadAllLines(personArguments.FileName);
+                for (var index = 0; index < lines.Length -1; index++)
                 {
                     var lineParts = lines[index].Split(',');
-                    if (lineParts[1] == pa.FirstName && lineParts[2] == pa.LastName)
+                    if (lineParts[1] == personArguments.FirstName && lineParts[2] == personArguments.LastName)
                     {
                         person.Id = Convert.ToInt32(lineParts[0]);
                         person.Birthday = DateTime.Parse(lineParts[4]);
@@ -41,17 +41,16 @@ namespace CodeSnippets.Classes
                 progress.Report("Task 1 complete");
                 return person;
 
-
             }, _cancellationToken);
 
             var taskTwo = await Task.Factory.StartNew(async () =>
             {
-                for (int index = 0; index < 5; index++)
+                for (var index = 0; index < 5; index++)
                 {
                     _cancellationToken.ThrowIfCancellationRequested();
                     progress.Report(index.ToString());
 
-                    await Task.Delay(12);
+                    await Task.Delay(12, _cancellationToken);
 
                     _cancellationToken.WaitHandle.WaitOne(500);
                 }
@@ -60,7 +59,6 @@ namespace CodeSnippets.Classes
                 return true;
 
             }, _cancellationToken);
-
 
             Task.WaitAll(taskOne, taskTwo);
             progress.Report("Both task done!");
