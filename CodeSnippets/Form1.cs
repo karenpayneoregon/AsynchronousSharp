@@ -170,7 +170,7 @@ namespace CodeSnippets
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void button1_Click(object sender, EventArgs e)
+        private async void WaitAll_Click(object sender, EventArgs e)
         {
 
             var fileName1 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Names1.txt");
@@ -185,7 +185,40 @@ namespace CodeSnippets
             var operations = new ShortSamples();
             await Task.Run(() => operations.Example1Async(personArgs1, progress));
         }
+        /// <summary>
+        /// User interface will not be responsive on the average machince
+        /// The bottleneck is opening Excel for the first time
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExcelSynchronousButton_Click(object sender, EventArgs e)
+        {
+            var ops = new Examples();
+            ops.OpenExcel(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MyFile.xlsx"), "Sheet2");
 
+            MessageBox.Show("Done");
 
+        }
+        /// <summary>
+        /// Allow the user interface to remain responsive.
+        /// The bottleneck is opening Excel for the first time
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void ExcelAsynchronousButton_Click(object sender, EventArgs e)
+        {
+            var ops = new Examples();
+            try
+            {
+                await Task.Run(() => ops.OpenExcel(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MyFile.xlsx"), "Sheet2"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Encountered errors\n{ex.Message}");
+            }
+
+            MessageBox.Show("Done");
+
+        }
     }
 }

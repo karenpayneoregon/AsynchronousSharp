@@ -10,7 +10,7 @@ namespace CodeSnippets.Classes
 {
     public class ShortSamples
     {
-        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        //CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         CancellationToken cancellationToken = new CancellationToken();
 
         public async Task Example1Async(PersonArguments pa, IProgress<string> progress)
@@ -68,7 +68,9 @@ namespace CodeSnippets.Classes
 
             var personResult = taskOne.Result;
 
-            progress.Report(personResult.Id > -1 ? $"Birthday: {personResult.Birthday:d} - gender: {personResult.Gender}" : $"Not found");
+            progress.Report(personResult.Id > -1 ? 
+                $"Birthday: {personResult.Birthday:d} - gender: {personResult.Gender}" : 
+                $"Not found");
         }
     }
 }

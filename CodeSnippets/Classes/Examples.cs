@@ -1,6 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Office.Core;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Runtime.InteropServices;
+using BaseConnectionLibrary;
 
 namespace CodeSnippets.Classes
 {
@@ -21,7 +27,7 @@ namespace CodeSnippets.Classes
     ///     with exception handling
     /// 
     /// </summary>
-    public class Examples
+    public class Examples : BaseExceptionProperties
     {
         public delegate void IndexHandler(object sender, ProcessIndexingArgs args);
         public event IndexHandler OnIterate;
@@ -89,7 +95,7 @@ namespace CodeSnippets.Classes
             return index;
         }
         /// <summary>
-        /// 
+        /// Alternate to Task.Delay
         /// </summary>
         /// <param name="millisecondsTimeout"></param>
         /// <returns></returns>
@@ -106,21 +112,84 @@ namespace CodeSnippets.Classes
             return taskCompletionSource.Task;
         }
 
-    }
 
-    public class ProcessIndexingArgs : EventArgs
-    {
-        protected int Index;
-
-        public ProcessIndexingArgs(int sender)
+        public void OpenExcel(string excelFileName, string sheetName)
         {
-            Index = sender;
+            mHasException = false;
+
+            try
+            {
+                var annihilationList = new List<object>();
+
+                Excel.Application xlApp = null;
+                Excel.Workbooks xlWorkBooks = null;
+                Excel.Workbook xlWorkBook = null;
+                Excel.Worksheet xlWorkSheet = null;
+                Excel.Sheets xlWorkSheets = null;
+
+
+                xlApp = new Excel.Application();
+                annihilationList.Add(xlApp);
+                xlApp.DisplayAlerts = false;
+                xlWorkBooks = xlApp.Workbooks;
+                annihilationList.Add(xlWorkBooks);
+                xlWorkBook = xlWorkBooks.Open(excelFileName);
+                annihilationList.Add(xlWorkBook);
+
+                xlApp.Visible = false;
+
+                xlWorkSheets = xlWorkBook.Sheets;
+                annihilationList.Add(xlWorkSheets);
+
+                for (int index = 1; index <= xlWorkSheets.Count; index++)
+                {
+                    xlWorkSheet = (Excel.Worksheet)xlWorkSheets[index];
+                    annihilationList.Add(xlWorkSheet);
+
+                    if (xlWorkSheet.Name == sheetName)
+                    {
+                        break;
+                    }
+
+                    annihilationList.Add(xlWorkSheet);
+                }
+
+                xlWorkBook.Close();
+                xlApp.UserControl = true;
+                xlApp.Quit();
+                ReleaseObjects(annihilationList);
+            }
+            catch (Exception ex)
+            {
+                mHasException = true;
+                mLastException = ex;
+            }
+
         }
-        public int Value => Index;
-
-        public override string ToString()
+        /// <summary>
+        /// Given a list of Excel objects, dispose of each object
+        /// and while doing so check to ensure an object is not 
+        /// null or nothing.
+        /// </summary>
+        /// <param name="pAnnihilationList"></param>
+        public void ReleaseObjects(List<object> pAnnihilationList)
         {
-            return Index.ToString();
+
+            for (var indexer = 0; indexer < pAnnihilationList.Count; indexer++)
+            {
+                try
+                {
+                    if (pAnnihilationList[indexer] != null)
+                    {
+                        Marshal.ReleaseComObject(pAnnihilationList[indexer]);
+                        pAnnihilationList[indexer] = null;
+                    }
+                }
+                catch (Exception)
+                {
+                    pAnnihilationList[indexer] = null;
+                }
+            }
         }
     }
 }

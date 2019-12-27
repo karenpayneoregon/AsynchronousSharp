@@ -39,8 +39,14 @@
             this.IterateFolderButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ExcelGroupBox = new System.Windows.Forms.GroupBox();
+            this.ExcelAsynchronousButton = new System.Windows.Forms.Button();
+            this.ExcelSynchronousButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.ExcelGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ProcessAsync1Button
@@ -127,7 +133,7 @@
             // 
             // IterateFolderButton
             // 
-            this.IterateFolderButton.Location = new System.Drawing.Point(431, 101);
+            this.IterateFolderButton.Location = new System.Drawing.Point(13, 284);
             this.IterateFolderButton.Name = "IterateFolderButton";
             this.IterateFolderButton.Size = new System.Drawing.Size(98, 23);
             this.IterateFolderButton.TabIndex = 4;
@@ -137,30 +143,72 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(40, 101);
+            this.button1.Location = new System.Drawing.Point(27, 22);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(98, 23);
             this.button1.TabIndex = 5;
             this.button1.Text = "Task.WaitAll";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.WaitAll_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(40, 130);
+            this.textBox1.Location = new System.Drawing.Point(27, 51);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(202, 68);
+            this.textBox1.Size = new System.Drawing.Size(202, 127);
             this.textBox1.TabIndex = 6;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Location = new System.Drawing.Point(13, 89);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(271, 189);
+            this.groupBox3.TabIndex = 7;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "WaitAll";
+            // 
+            // ExcelGroupBox
+            // 
+            this.ExcelGroupBox.Controls.Add(this.ExcelAsynchronousButton);
+            this.ExcelGroupBox.Controls.Add(this.ExcelSynchronousButton);
+            this.ExcelGroupBox.Location = new System.Drawing.Point(295, 99);
+            this.ExcelGroupBox.Name = "ExcelGroupBox";
+            this.ExcelGroupBox.Size = new System.Drawing.Size(280, 72);
+            this.ExcelGroupBox.TabIndex = 8;
+            this.ExcelGroupBox.TabStop = false;
+            this.ExcelGroupBox.Text = "Excel automation";
+            // 
+            // ExcelAsynchronousButton
+            // 
+            this.ExcelAsynchronousButton.Location = new System.Drawing.Point(136, 28);
+            this.ExcelAsynchronousButton.Name = "ExcelAsynchronousButton";
+            this.ExcelAsynchronousButton.Size = new System.Drawing.Size(98, 23);
+            this.ExcelAsynchronousButton.TabIndex = 2;
+            this.ExcelAsynchronousButton.Text = "Asynchronous";
+            this.ExcelAsynchronousButton.UseVisualStyleBackColor = true;
+            this.ExcelAsynchronousButton.Click += new System.EventHandler(this.ExcelAsynchronousButton_Click);
+            // 
+            // ExcelSynchronousButton
+            // 
+            this.ExcelSynchronousButton.Location = new System.Drawing.Point(32, 28);
+            this.ExcelSynchronousButton.Name = "ExcelSynchronousButton";
+            this.ExcelSynchronousButton.Size = new System.Drawing.Size(98, 23);
+            this.ExcelSynchronousButton.TabIndex = 1;
+            this.ExcelSynchronousButton.Text = "Synchronous";
+            this.ExcelSynchronousButton.UseVisualStyleBackColor = true;
+            this.ExcelSynchronousButton.Click += new System.EventHandler(this.ExcelSynchronousButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 210);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(582, 340);
+            this.Controls.Add(this.ExcelGroupBox);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.IterateFolderButton);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -172,8 +220,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.ExcelGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -190,6 +240,10 @@
         private System.Windows.Forms.Button IterateFolderButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox ExcelGroupBox;
+        private System.Windows.Forms.Button ExcelSynchronousButton;
+        private System.Windows.Forms.Button ExcelAsynchronousButton;
     }
 }
 
