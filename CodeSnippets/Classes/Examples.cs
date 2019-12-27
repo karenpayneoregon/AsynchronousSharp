@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Office.Core;
+
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using BaseConnectionLibrary;
@@ -53,12 +53,10 @@ namespace CodeSnippets.Classes
 
                 OnIterate?.Invoke(this, new ProcessIndexingArgs(index));
 
-
                 if (ct.IsCancellationRequested)
                 {
                     ct.ThrowIfCancellationRequested();
                 }
-
 
                 result += index;
 
@@ -82,12 +80,10 @@ namespace CodeSnippets.Classes
                 await Task.Delay(10, ct).ConfigureAwait(false);
                 OnIterate?.Invoke(this, new ProcessIndexingArgs(index));
 
-
                 if (ct.IsCancellationRequested)
                 {
                     ct.ThrowIfCancellationRequested();
                 }
-
 
                 index += i;
             }
@@ -127,7 +123,6 @@ namespace CodeSnippets.Classes
                 Excel.Worksheet xlWorkSheet = null;
                 Excel.Sheets xlWorkSheets = null;
 
-
                 xlApp = new Excel.Application();
                 annihilationList.Add(xlApp);
                 xlApp.DisplayAlerts = false;
@@ -141,7 +136,7 @@ namespace CodeSnippets.Classes
                 xlWorkSheets = xlWorkBook.Sheets;
                 annihilationList.Add(xlWorkSheets);
 
-                for (int index = 1; index <= xlWorkSheets.Count; index++)
+                for (var index = 1; index <= xlWorkSheets.Count; index++)
                 {
                     xlWorkSheet = (Excel.Worksheet)xlWorkSheets[index];
                     annihilationList.Add(xlWorkSheet);
@@ -157,7 +152,9 @@ namespace CodeSnippets.Classes
                 xlWorkBook.Close();
                 xlApp.UserControl = true;
                 xlApp.Quit();
+
                 ReleaseObjects(annihilationList);
+
             }
             catch (Exception ex)
             {

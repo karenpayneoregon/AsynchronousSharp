@@ -24,6 +24,11 @@ namespace CodeSnippets
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Basic async pattern with cancellation option
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void ProcessAsync1Button_Click(object sender, EventArgs e)
         {
 
@@ -62,7 +67,13 @@ namespace CodeSnippets
         {
             _cancellationTokenSource.Cancel();
         }
-
+        /// <summary>
+        /// Run a long running task composed of small awaited and configured tasks
+        /// Using ConfigureAwait(false) makes this particular method run a bit faster
+        /// then the example above.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void ProcessAsync2Button_Click(object sender, EventArgs e)
         {
             if (_cancellationTokenSource.IsCancellationRequested)
@@ -128,21 +139,49 @@ namespace CodeSnippets
         /// <param name="args"></param>
         private void Ops_OnIterate2(object sender, ProcessIndexingArgs args)
         {
-            ProcessStatus2Label.Text = args.ToString();
-            ProcessStatus2Label.InvokeIfRequired(d => { ProcessStatus2Label.Text = args.ToString(); });
+
+            /*
+             * It's unsafe to call a control directly from a thread that didn't create it which happens
+             * in this case setting ProcessStatus2Label.Text directly, instead the extension method
+             * InvokeIfRequired ensuring thread-safe call is made to ProcessStatus2Label.
+             *
+             * InvokeIfRequired extension method is used in other code samples in this Visual Studio solution.
+             * By using InvokeIfRequired creates uniformity when an Action is required in the calling thread.
+             *
+             */
+            if (EnableCrossThreadButton.Checked)
+            {
+                ProcessStatus2Label.Text = args.ToString();
+            }
+            else
+            {
+                ProcessStatus2Label.InvokeIfRequired(d => { ProcessStatus2Label.Text = args.ToString(); });
+            }            
+            
         }
         /// <summary>
-        /// Wrap synchronous operation in a task
+        /// Wrap synchronous operation in a task.
+        ///
+        /// Before running this code, change the path to an existing folder which has a decent amount
+        /// of child folders followed by changing fileExtension variable pattern to files that can
+        /// be found in the folder assigned in the variable rooFolder
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private  async void IterateFolderButton_Click(object sender, EventArgs e)
+        private async void IterateFolderButton_Click(object sender, EventArgs e)
         {
             var rootFolder = "C:\\Dotnet_Development\\VS2017\\TechNet";
+            var fileExtension = "*.cs";
+
+            if (!Directory.Exists(rootFolder))
+            {
+                MessageBox.Show("Folder does not exists, please read comments in this method");
+                return;
+            }
 
             if (!Directory.Exists(rootFolder)) return;
 
-            var result = await Task.Run(() => DirectoryLibrary.GetFileList("*.cs", rootFolder));
+            var result = await Task.Run(() => DirectoryLibrary.GetFileList(fileExtension, rootFolder));
 
             foreach (FileInfo item in result)
             {
@@ -174,6 +213,13 @@ namespace CodeSnippets
         {
 
             var fileName1 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Names1.txt");
+
+            if (!File.Exists(fileName1))
+            {
+                MessageBox.Show("Failed to find file, please ensure the file exists.");
+                return;
+            }
+
             var personArgs1 = new PersonArguments()
             {
                 FileName = fileName1,
@@ -193,10 +239,18 @@ namespace CodeSnippets
         /// <param name="e"></param>
         private void ExcelSynchronousButton_Click(object sender, EventArgs e)
         {
-            var ops = new Examples();
-            ops.OpenExcel(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MyFile.xlsx"), "Sheet2");
+            var excelFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MyFile.xlsx");
 
-            MessageBox.Show("Done");
+            if (!File.Exists(excelFile))
+            {
+                MessageBox.Show("Failed to find file, please ensure the file exists.");
+                return;
+            }
+
+            var ops = new Examples();
+            ops.OpenExcel(excelFile, "Sheet2");
+
+            MessageBox.Show("Done. Check Task Manager Processes and Excel should not be in the list.");
 
         }
         /// <summary>
@@ -207,10 +261,20 @@ namespace CodeSnippets
         /// <param name="e"></param>
         private async void ExcelAsynchronousButton_Click(object sender, EventArgs e)
         {
+
+            var excelFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MyFile.xlsx");
+
+            if (!File.Exists(excelFile))
+            {
+                MessageBox.Show("Failed to find file, please ensure the file exists.");
+                return;
+            }
+
             var ops = new Examples();
+
             try
             {
-                await Task.Run(() => ops.OpenExcel(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MyFile.xlsx"), "Sheet2"));
+                await Task.Run(() => ops.OpenExcel(excelFile, "Sheet2"));
             }
             catch (Exception ex)
             {

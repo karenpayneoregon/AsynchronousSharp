@@ -10,8 +10,8 @@ namespace CodeSnippets.Classes
 {
     public class ShortSamples
     {
-        //CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-        CancellationToken cancellationToken = new CancellationToken();
+        CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        CancellationToken _cancellationToken = new CancellationToken();
 
         public async Task Example1Async(PersonArguments pa, IProgress<string> progress)
         {
@@ -35,31 +35,31 @@ namespace CodeSnippets.Classes
                         break;
                     }
 
-                    await Task.Delay(1, cancellationToken);
+                    await Task.Delay(1, _cancellationToken);
                 }
 
                 progress.Report("Task 1 complete");
                 return person;
 
 
-            }, cancellationToken);
+            }, _cancellationToken);
 
             var taskTwo = await Task.Factory.StartNew(async () =>
             {
                 for (int index = 0; index < 5; index++)
                 {
-                    cancellationToken.ThrowIfCancellationRequested();
+                    _cancellationToken.ThrowIfCancellationRequested();
                     progress.Report(index.ToString());
 
                     await Task.Delay(12);
 
-                    cancellationToken.WaitHandle.WaitOne(500);
+                    _cancellationToken.WaitHandle.WaitOne(500);
                 }
 
                 progress.Report("Task 2 complete");
                 return true;
 
-            }, cancellationToken);
+            }, _cancellationToken);
 
 
             Task.WaitAll(taskOne, taskTwo);

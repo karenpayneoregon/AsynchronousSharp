@@ -43,6 +43,7 @@
             this.ExcelGroupBox = new System.Windows.Forms.GroupBox();
             this.ExcelAsynchronousButton = new System.Windows.Forms.Button();
             this.ExcelSynchronousButton = new System.Windows.Forms.Button();
+            this.EnableCrossThreadButton = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -76,7 +77,7 @@
             this.groupBox1.Controls.Add(this.ProcessAsync1Button);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(273, 66);
+            this.groupBox1.Size = new System.Drawing.Size(273, 84);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Process Async 1";
@@ -92,12 +93,13 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.EnableCrossThreadButton);
             this.groupBox2.Controls.Add(this.ProcessStatus2Label);
             this.groupBox2.Controls.Add(this.CancelExample2Button);
             this.groupBox2.Controls.Add(this.ProcessAsync2Button);
             this.groupBox2.Location = new System.Drawing.Point(299, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(277, 66);
+            this.groupBox2.Size = new System.Drawing.Size(277, 84);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Process Async 2";
@@ -133,7 +135,7 @@
             // 
             // IterateFolderButton
             // 
-            this.IterateFolderButton.Location = new System.Drawing.Point(13, 284);
+            this.IterateFolderButton.Location = new System.Drawing.Point(13, 310);
             this.IterateFolderButton.Name = "IterateFolderButton";
             this.IterateFolderButton.Size = new System.Drawing.Size(98, 23);
             this.IterateFolderButton.TabIndex = 4;
@@ -164,7 +166,7 @@
             // 
             this.groupBox3.Controls.Add(this.textBox1);
             this.groupBox3.Controls.Add(this.button1);
-            this.groupBox3.Location = new System.Drawing.Point(13, 89);
+            this.groupBox3.Location = new System.Drawing.Point(13, 115);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(271, 189);
             this.groupBox3.TabIndex = 7;
@@ -175,7 +177,7 @@
             // 
             this.ExcelGroupBox.Controls.Add(this.ExcelAsynchronousButton);
             this.ExcelGroupBox.Controls.Add(this.ExcelSynchronousButton);
-            this.ExcelGroupBox.Location = new System.Drawing.Point(295, 99);
+            this.ExcelGroupBox.Location = new System.Drawing.Point(295, 115);
             this.ExcelGroupBox.Name = "ExcelGroupBox";
             this.ExcelGroupBox.Size = new System.Drawing.Size(280, 72);
             this.ExcelGroupBox.TabIndex = 8;
@@ -201,6 +203,16 @@
             this.ExcelSynchronousButton.Text = "Synchronous";
             this.ExcelSynchronousButton.UseVisualStyleBackColor = true;
             this.ExcelSynchronousButton.Click += new System.EventHandler(this.ExcelSynchronousButton_Click);
+            // 
+            // EnableCrossThreadButton
+            // 
+            this.EnableCrossThreadButton.AutoSize = true;
+            this.EnableCrossThreadButton.Location = new System.Drawing.Point(28, 48);
+            this.EnableCrossThreadButton.Name = "EnableCrossThreadButton";
+            this.EnableCrossThreadButton.Size = new System.Drawing.Size(217, 17);
+            this.EnableCrossThreadButton.TabIndex = 4;
+            this.EnableCrossThreadButton.Text = "Enable (Cross-thread operation not valid)";
+            this.EnableCrossThreadButton.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -244,6 +256,7 @@
         private System.Windows.Forms.GroupBox ExcelGroupBox;
         private System.Windows.Forms.Button ExcelSynchronousButton;
         private System.Windows.Forms.Button ExcelAsynchronousButton;
+        private System.Windows.Forms.CheckBox EnableCrossThreadButton;
     }
 }
 

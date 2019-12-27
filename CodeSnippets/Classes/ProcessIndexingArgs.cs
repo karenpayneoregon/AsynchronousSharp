@@ -2,6 +2,9 @@
 
 namespace CodeSnippets.Classes
 {
+    /// <summary>
+    /// Custom event for reporting progress in async operations
+    /// </summary>
     public class ProcessIndexingArgs : EventArgs
     {
         protected int Index;
