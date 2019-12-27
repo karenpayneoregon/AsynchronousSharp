@@ -6,7 +6,7 @@ namespace WinFormsComponentLibrary
 {
     /// <summary>
     /// Provides a generic collection that supports data binding and additionally supports sorting.
-    /// See http://msdn.microsoft.com/en-us/library/ms993236.aspx
+    /// See http://msdn.microsoft.com/en-us/library/ms993236.aspx (link is dead)
     /// If the elements are IComparable it uses that; otherwise compares the ToString()
     /// </summary>
     /// <typeparam name="T">The type of elements in the list.</typeparam>

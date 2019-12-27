@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DateTimeFromInternet.cs" />
     <Compile Include="Classes\DirectoryLibrary.cs" />
     <Compile Include="Classes\Examples.cs" />
     <Compile Include="Classes\Person.cs" />

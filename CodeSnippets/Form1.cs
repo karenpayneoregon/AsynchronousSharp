@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -283,6 +284,39 @@ namespace CodeSnippets
 
             MessageBox.Show("Done");
 
+        }
+        /// <summary>
+        /// Depending on several factors the first time asking for
+        /// the current date time may take around five seconds and
+        /// cause the user interface to become unresponsive without
+        /// running code in a Task.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void GetCurrentDateTimeButton_Click(object sender, EventArgs e)
+        {
+            ElapsedTimeLabel.Text = "00-00-00";
+            ElapsedTimeLabel.Refresh();
+
+            var watch = new Stopwatch();
+            watch.Start();
+
+            var operation = new DateTimeFromInternet();
+            var result = await operation.Formatted();
+
+            watch.Stop();
+
+            ElapsedTimeLabel.Text = watch.Elapsed.ToString("mm\\:ss\\.ff");
+
+            if (Convert.ToDateTime(result) == DateTime.MinValue)
+            {
+                MessageBox.Show("Failed to get current date time");
+            }
+            else
+            {
+                MessageBox.Show(result);
+            }
+            
         }
     }
 }

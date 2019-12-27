@@ -33,6 +33,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ProcessStatus1Label = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.EnableCrossThreadButton = new System.Windows.Forms.CheckBox();
             this.ProcessStatus2Label = new System.Windows.Forms.Label();
             this.CancelExample2Button = new System.Windows.Forms.Button();
             this.ProcessAsync2Button = new System.Windows.Forms.Button();
@@ -43,11 +44,14 @@
             this.ExcelGroupBox = new System.Windows.Forms.GroupBox();
             this.ExcelAsynchronousButton = new System.Windows.Forms.Button();
             this.ExcelSynchronousButton = new System.Windows.Forms.Button();
-            this.EnableCrossThreadButton = new System.Windows.Forms.CheckBox();
+            this.GetCurrentDateTimeButton = new System.Windows.Forms.Button();
+            this.ElapsedTimeLabel = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.ExcelGroupBox.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // ProcessAsync1Button
@@ -103,6 +107,16 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Process Async 2";
+            // 
+            // EnableCrossThreadButton
+            // 
+            this.EnableCrossThreadButton.AutoSize = true;
+            this.EnableCrossThreadButton.Location = new System.Drawing.Point(28, 48);
+            this.EnableCrossThreadButton.Name = "EnableCrossThreadButton";
+            this.EnableCrossThreadButton.Size = new System.Drawing.Size(217, 17);
+            this.EnableCrossThreadButton.TabIndex = 4;
+            this.EnableCrossThreadButton.Text = "Enable (Cross-thread operation not valid)";
+            this.EnableCrossThreadButton.UseVisualStyleBackColor = true;
             // 
             // ProcessStatus2Label
             // 
@@ -204,21 +218,42 @@
             this.ExcelSynchronousButton.UseVisualStyleBackColor = true;
             this.ExcelSynchronousButton.Click += new System.EventHandler(this.ExcelSynchronousButton_Click);
             // 
-            // EnableCrossThreadButton
+            // GetCurrentDateTimeButton
             // 
-            this.EnableCrossThreadButton.AutoSize = true;
-            this.EnableCrossThreadButton.Location = new System.Drawing.Point(28, 48);
-            this.EnableCrossThreadButton.Name = "EnableCrossThreadButton";
-            this.EnableCrossThreadButton.Size = new System.Drawing.Size(217, 17);
-            this.EnableCrossThreadButton.TabIndex = 4;
-            this.EnableCrossThreadButton.Text = "Enable (Cross-thread operation not valid)";
-            this.EnableCrossThreadButton.UseVisualStyleBackColor = true;
+            this.GetCurrentDateTimeButton.Location = new System.Drawing.Point(29, 23);
+            this.GetCurrentDateTimeButton.Name = "GetCurrentDateTimeButton";
+            this.GetCurrentDateTimeButton.Size = new System.Drawing.Size(98, 23);
+            this.GetCurrentDateTimeButton.TabIndex = 9;
+            this.GetCurrentDateTimeButton.Text = "Get";
+            this.GetCurrentDateTimeButton.UseVisualStyleBackColor = true;
+            this.GetCurrentDateTimeButton.Click += new System.EventHandler(this.GetCurrentDateTimeButton_Click);
+            // 
+            // ElapsedTimeLabel
+            // 
+            this.ElapsedTimeLabel.AutoSize = true;
+            this.ElapsedTimeLabel.Location = new System.Drawing.Point(170, 28);
+            this.ElapsedTimeLabel.Name = "ElapsedTimeLabel";
+            this.ElapsedTimeLabel.Size = new System.Drawing.Size(49, 13);
+            this.ElapsedTimeLabel.TabIndex = 10;
+            this.ElapsedTimeLabel.Text = "00-00-00";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.ElapsedTimeLabel);
+            this.groupBox4.Controls.Add(this.GetCurrentDateTimeButton);
+            this.groupBox4.Location = new System.Drawing.Point(298, 203);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(276, 68);
+            this.groupBox4.TabIndex = 11;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Internet get current date time";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(582, 340);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.ExcelGroupBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.IterateFolderButton);
@@ -235,6 +270,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ExcelGroupBox.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -257,6 +294,9 @@
         private System.Windows.Forms.Button ExcelSynchronousButton;
         private System.Windows.Forms.Button ExcelAsynchronousButton;
         private System.Windows.Forms.CheckBox EnableCrossThreadButton;
+        private System.Windows.Forms.Button GetCurrentDateTimeButton;
+        private System.Windows.Forms.Label ElapsedTimeLabel;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }
 
