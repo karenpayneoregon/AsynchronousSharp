@@ -27,12 +27,36 @@ namespace ForumQuestion1
             _bindingSource.DataSource = FileReader.ConventionalRead(_FileName);
             bindingNavigator1.BindingSource = _bindingSource;
 
+            // for when using one TextBox
+            _bindingSource.PositionChanged += _bindingSource_PositionChanged;
+
             // data bind all properties except CustomerIdentifier
+            #region For when not using one TextBox
+
             CompanyNameTextBox.DataBindings.Add("Text", _bindingSource, "CompanyName");
             ContactNameTextBox.DataBindings.Add("Text", _bindingSource, "ContactName");
             ContactTitleTextBox.DataBindings.Add("Text", _bindingSource, "ContactTitle");
             CityTextBox.DataBindings.Add("Text", _bindingSource, "City");
             CountryTextBox.DataBindings.Add("Text", _bindingSource, "Country");
+
+            #endregion
+
+            ReadToTextBox();
+
+        }
+        /// <summary>
+        /// Read all elements of a line into a TextBox
+        /// </summary>
+        private void ReadToTextBox()
+        {
+            var current = (Customer)_bindingSource.Current;
+
+            LineTextBox.Text = $"{current.CompanyName},{current.ContactName},{current.ContactTitle},{current.City},{current.Country}";
+        }
+
+        private void _bindingSource_PositionChanged(object sender, EventArgs e)
+        {
+            ReadToTextBox();
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
