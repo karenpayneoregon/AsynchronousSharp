@@ -14,6 +14,8 @@ namespace FileLibrary.Classes
         public string ContactTitle { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public string LinesItems => $"{CustomerIdentifier},{CompanyName},{ContactName}, {ContactTitle},{City}, {Country}";
+
         public override string ToString()
         {
             return CompanyName;
