@@ -15,6 +15,7 @@ using FileLibrary;
 using FileLibrary.Classes;
 using WinFormsComponentLibrary;
 using WinFormsExtensionsLibrary;
+using static DataGridViewLoadDelimitedFileAsynchronous.HelperClasses.Dialogs;
 
 namespace DataGridViewLoadDelimitedFileAsynchronous
 {
@@ -45,8 +46,32 @@ namespace DataGridViewLoadDelimitedFileAsynchronous
         private void Form1_Shown(object sender, EventArgs e)
         {
             bindingNavigator1.BindingSource = _customersBindingSource;
+            
         }
+        private void DataGridView1_RowValidating(object sender, DataGridViewCellCancelEventArgs eventArgs)
+        {
+            var row = dataGridView1.Rows[eventArgs.RowIndex];
 
+            if (row.DataBoundItem != null)
+            {
+                // proof we can access the customer object
+                var customer = row.DataBoundItem as Customer;
+                // do whatever here
+                Console.WriteLine($"Row Validating on {customer.CompanyName}");
+            }
+
+        }
+        private void RemoveCurrentButton_Click(object sender, EventArgs e)
+        {
+            if (_customersBindingSource.Count <= 0) return;
+
+            if (Question($"Remove {((Customer)_customersBindingSource.Current).CompanyName} ?"))
+            {
+                dataGridView1.RowValidating -= DataGridView1_RowValidating;
+                _customersBindingSource.RemoveCurrent();
+                dataGridView1.RowValidating += DataGridView1_RowValidating;
+            }
+        }
 
         /// <summary>
         /// Read file using StreamReader.ReadLineAsync, create a new customer in each
@@ -404,7 +429,10 @@ namespace DataGridViewLoadDelimitedFileAsynchronous
             watch.Stop();
 
             ElapsedTimeLabel.Invoke((MethodInvoker)(() => ElapsedTimeLabel.Text = watch.Elapsed.ToString("mm\\:ss\\.ff")));
+            dataGridView1.RowValidating -= DataGridView1_RowValidating;
+            dataGridView1.RowValidating += DataGridView1_RowValidating;
 
+            RemoveCurrentButton.Enabled = true;
         }
 
         private void ConventionalReadButton_Click(object sender, EventArgs e)
@@ -493,5 +521,7 @@ namespace DataGridViewLoadDelimitedFileAsynchronous
                 MessageBox.Show($"Finished loading customers: {customers.Count()}");
             }, TaskContinuationOptions.OnlyOnRanToCompletion);
         }
+
+
     }
 }

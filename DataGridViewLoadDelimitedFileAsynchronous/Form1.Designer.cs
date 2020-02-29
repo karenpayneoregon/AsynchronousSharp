@@ -43,6 +43,8 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.RemoveCurrentButton = new System.Windows.Forms.Button();
+            this.CustomersComoBox = new System.Windows.Forms.ComboBox();
             this.ContinueWith1Button = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.CancelExample1Button = new System.Windows.Forms.Button();
@@ -59,7 +61,6 @@
             this.Example5aButton = new System.Windows.Forms.Button();
             this.PleaseWaitPanel = new System.Windows.Forms.Panel();
             this.PleaseWaitLabel = new System.Windows.Forms.Label();
-            this.CustomersComoBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -183,6 +184,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.RemoveCurrentButton);
             this.panel1.Controls.Add(this.CustomersComoBox);
             this.panel1.Controls.Add(this.ContinueWith1Button);
             this.panel1.Controls.Add(this.groupBox1);
@@ -201,6 +203,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(848, 178);
             this.panel1.TabIndex = 2;
+            // 
+            // RemoveCurrentButton
+            // 
+            this.RemoveCurrentButton.Enabled = false;
+            this.RemoveCurrentButton.Location = new System.Drawing.Point(310, 105);
+            this.RemoveCurrentButton.Name = "RemoveCurrentButton";
+            this.RemoveCurrentButton.Size = new System.Drawing.Size(132, 23);
+            this.RemoveCurrentButton.TabIndex = 20;
+            this.RemoveCurrentButton.Text = "Remove current";
+            this.RemoveCurrentButton.UseVisualStyleBackColor = true;
+            this.RemoveCurrentButton.Click += new System.EventHandler(this.RemoveCurrentButton_Click);
+            // 
+            // CustomersComoBox
+            // 
+            this.CustomersComoBox.FormattingEnabled = true;
+            this.CustomersComoBox.Location = new System.Drawing.Point(480, 42);
+            this.CustomersComoBox.Name = "CustomersComoBox";
+            this.CustomersComoBox.Size = new System.Drawing.Size(132, 21);
+            this.CustomersComoBox.TabIndex = 18;
             // 
             // ContinueWith1Button
             // 
@@ -360,14 +381,6 @@
             this.PleaseWaitLabel.TabIndex = 0;
             this.PleaseWaitLabel.Text = "Loading data please wait";
             // 
-            // CustomersComoBox
-            // 
-            this.CustomersComoBox.FormattingEnabled = true;
-            this.CustomersComoBox.Location = new System.Drawing.Point(480, 42);
-            this.CustomersComoBox.Name = "CustomersComoBox";
-            this.CustomersComoBox.Size = new System.Drawing.Size(132, 21);
-            this.CustomersComoBox.TabIndex = 18;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -426,6 +439,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button ContinueWith1Button;
         private System.Windows.Forms.ComboBox CustomersComoBox;
+        private System.Windows.Forms.Button RemoveCurrentButton;
     }
 }
 
